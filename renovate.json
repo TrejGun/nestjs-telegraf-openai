@@ -1,0 +1,4 @@
+{
+  "extends": ["github>ethberry/renovate-config"],
+  "baseBranches": ["main"]
+}

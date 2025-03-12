@@ -22,8 +22,8 @@ export class BotService {
       role: "user",
     });
 
-    const isFlaged = await this.chatService.moderate(ctx.session);
-    if (isFlaged) {
+    const isFlagged = await this.chatService.moderate(ctx.session);
+    if (isFlagged) {
       throw new BadRequestException("Please refrain on using any offensive language.");
     }
 

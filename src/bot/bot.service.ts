@@ -17,12 +17,10 @@ export class BotService {
       return;
     }
 
-    const msg: CoreMessage = {
+    ctx.session.push({
       content: message.text,
       role: "user",
-    };
-
-    ctx.session.push(msg);
+    });
 
     const isFlaged = await this.chatService.moderate(ctx.session);
     if (isFlaged) {

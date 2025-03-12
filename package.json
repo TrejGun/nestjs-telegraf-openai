@@ -5,7 +5,7 @@
     "url": "https://ethberry.io/"
   },
   "bugs": {
-    "url": "https://github.com/ethberry/stars-to-usdt/"
+    "url": "https://github.com/ethberry/nestjs-telegraf-openai/"
   },
   "dependencies": {
     "@ai-sdk/openai": "1.1.14",
@@ -13,7 +13,6 @@
     "@nestjs/config": "4.0.1",
     "@nestjs/core": "11.0.11",
     "@nestjs/platform-express": "11.0.11",
-    "@nestjs/swagger": "11.0.5",
     "@telegraf/session": "2.0.0-beta.7",
     "ai": "4.1.46",
     "axios": "1.8.2",
@@ -44,11 +43,11 @@
   },
   "license": "UNLICENSED",
   "main": "./dist/index.js",
-  "name": "@ethberry/stars-to-usdt",
+  "name": "@ethberry/nestjs-telegraf-openai",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/ethberry/stars-to-usdt/"
+    "url": "https://github.com/ethberry/nestjs-telegraf-openai/"
   },
   "scripts": {
     "build": "tsc",

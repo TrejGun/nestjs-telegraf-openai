@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { Context } from "telegraf";
-import type { Message as MessageType } from "@telegraf/types";
-import { CoreMessage } from "ai";
+import type { Message } from "@telegraf/types";
+import { ModelMessage } from "ai";
 
 import { ChatService } from "../chat/chat.service";
 
@@ -9,8 +9,8 @@ import { ChatService } from "../chat/chat.service";
 export class BotService {
   constructor(private readonly chatService: ChatService) {}
 
-  public async handleMessage(ctx: Context & { session: Array<CoreMessage> }) {
-    const message = ctx.message as MessageType.TextMessage;
+  public async handleMessage(ctx: Context & { session: Array<ModelMessage> }) {
+    const message = ctx.message as Message.TextMessage;
 
     if (!message.text) {
       await ctx.reply("No text provided");
@@ -27,18 +27,13 @@ export class BotService {
       throw new BadRequestException("Please refrain on using any offensive language.");
     }
 
-    const stream = this.chatService.chat(ctx.session);
-
-    let resultText = "";
-    for await (const part of stream.textStream) {
-      resultText += part;
-    }
+    const text = await this.chatService.chat(ctx.session);
 
     ctx.session.push({
-      content: resultText,
+      content: text,
       role: "assistant",
     });
 
-    await ctx.reply(resultText);
+    await ctx.reply(text);
   }
 }

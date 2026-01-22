@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger, LoggerService } from "@nestjs/common";
 import { openai } from "@ai-sdk/openai";
-import { CoreMessage, streamText } from "ai";
+import { ModelMessage, generateText } from "ai";
 import OpenAi from "openai";
 
 import { OPENAI_CLIENT } from "./openai.provider";
@@ -14,14 +14,16 @@ export class ChatService {
     protected readonly loggerService: LoggerService,
   ) {}
 
-  public chat(messages: Array<CoreMessage>) {
-    return streamText({
+  public async chat(messages: Array<ModelMessage>) {
+    const result = await generateText({
       model: openai("gpt-4o-mini"),
       messages,
     });
+
+    return result.text;
   }
 
-  public async moderate(messages: Array<CoreMessage>) {
+  public async moderate(messages: Array<ModelMessage>) {
     const current = messages[messages.length - 1];
 
     const { results } = await this.openaiClient.moderations.create({

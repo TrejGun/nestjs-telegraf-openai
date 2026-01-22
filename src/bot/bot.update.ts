@@ -1,6 +1,6 @@
 import { Ctx, On, Update } from "nestjs-telegraf";
 import { Context } from "telegraf";
-import { CoreMessage } from "ai";
+import { ModelMessage } from "ai";
 
 import { BotService } from "./bot.service";
 
@@ -9,7 +9,7 @@ export class BotUpdate {
   constructor(private readonly botService: BotService) {}
 
   @On("text")
-  onMessage(@Ctx() ctx: Context & { session: Array<CoreMessage> }) {
+  onMessage(@Ctx() ctx: Context & { session: Array<ModelMessage> }) {
     return this.botService.handleMessage(ctx);
   }
 }
